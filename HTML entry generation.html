@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>HTML generator</title>
+  <link rel="icon" type="image/ZSF" href="https://i.imgur.com/MJujC40.png">
+  <style>
+    body {
+      background: #222;
+      color: #eee;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .box {
+      background: #333;
+      padding: 20px;
+      max-width: 700px;
+      margin: auto;
+      border-radius: 8px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin: 6px 0 15px;
+      border: none;
+      border-radius: 4px;
+    }
+    button {
+      padding: 10px 20px;
+      background: #00ffff;
+      border: none;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    button:hover {
+      background: #0011ff;
+    }
+    #output {
+      white-space: pre;
+      background: #111;
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <h2>HTML Entry Generator</h2>
+
+    <label>Title:</label>
+    <input id="title">
+
+    <label>Type:</label>
+    <input id="type">
+
+    <label>Seeders:</label>
+    <input id="seeders">
+
+    <label>Leechers:</label>
+    <input id="leechers">
+
+    <label>Description 1 (above):</label>
+    <textarea id="opis1" rows="4"></textarea>
+
+    <label>Image (CRT style):</label>
+    <input id="img">
+
+    <label>Description 2 (below CRT):</label>
+    <textarea id="opis2" rows="4"></textarea>
+
+    <label>Download link (torrent):</label>
+    <input id="download">
+
+    <button onclick="generate()">Generate HTML</button>
+
+    <h3>Output:</h3>
+    <div id="output"></div>
+  </div>
+
+<script>
+// Auto date 
+function getToday() {
+  const d = new Date();
+  const day = String(d.getDate()).padStart(2, "0");
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const year = d.getFullYear();
+  return `${day}/${month}/${year}`;
+}
+
+function generate() {
+  const title = document.getElementById("title").value;
+  const type = document.getElementById("type").value;
+  const seeders = document.getElementById("seeders").value;
+  const leechers = document.getElementById("leechers").value;
+  const opis1 = document.getElementById("opis1").value;
+  const opis2 = document.getElementById("opis2").value;
+  const img = document.getElementById("img").value;
+  const download = document.getElementById("download").value;
+
+  const date = getToday(); // AUTO DATE
+
+  const html = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>${title}</title>
+  <style>
+    body {
+      background: #e9e9e9;
+      font-family: "Courier New", monospace;
+      color: #222;
+      padding-bottom: 40px;
+    }
+    .wrap {
+      border: 3px solid #000;
+      background: #fff;
+      max-width: 750px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      border-bottom: 2px dashed #000;
+      padding-bottom: 10px;
+      margin-bottom: 25px;
+    }
+    .info {
+      font-size: 15px;
+      line-height: 1.4;
+    }
+    .download-box {
+      border: 2px solid #000;
+      padding: 15px;
+      margin-top: 25px;
+      background: #f4f4f4;
+    }
+    a {
+      color: #0000aa;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    pre {
+      background: #f0f0f0;
+      border: 1px solid #000;
+      padding: 10px;
+      overflow-x: auto;
+      margin-top: 20px;
+    }
+    .back {
+      margin-top: 30px;
+      text-align: center;
+    }
+    .crt {
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+      border: 4px solid #000;
+      padding: 10px;
+      background: #111;
+      box-shadow: 0 0 25px #0f0 inset, 0 0 12px #0f0;
+    }
+    .crt img {
+      width: 100%;
+      display: block;
+      filter: contrast(1.2) brightness(0.9) saturate(1.3);
+      border: 2px solid #333;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <h1>${title}</h1>
+
+    <div class="info">
+      <p><strong>Added:</strong> ${date}</p>
+      <p><strong>Type:</strong> ${type}</p>
+      <p><strong>Seeders:</strong> ${seeders}</p>
+      <p><strong>Leechers:</strong> ${leechers}</p>
+      <p><strong>Description:</strong><br>${opis1}</p>
+    </div>
+
+    <div class="download-box">
+      <strong>Download via Torrent:</strong><br>
+      <a href="${download}">➡️ Download Torrent</a>
+    </div>
+
+    <h2 style="margin-top:30px;">Description</h2>
+
+    <pre>
+
+<h3>Description 1</h3>
+<p>${opis1}</p>
+
+<br>
+
+<div class="crt" style="width: 400px; margin: 0 auto;">
+  <img src="${img}" alt="CRT Preview">
+</div>
+
+<br>
+
+<h3>Description 2</h3>
+<p>${opis2}</p>
+
+    </pre>
+
+    <div class="back">
+      <a href="https://sites.google.com/view/zastonj-slovenija/domov">⮐ Back to Projects</a>
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  document.getElementById("output").textContent = html.trim();
+}
+</script>
+
+</body>
+</html>
