@@ -19,6 +19,6 @@ For the download link it doesn˙t need to be TORRENT, it can be any download lin
 ### ONLINE MAKER:
 Did you know you don`t have to download it, you can just use one on our site!
 
-https://sites.google.com/view/kermitshop/html-eg-demo
+[https://sites.google.com/view/kermitshop/html-eg-demo](https://sites.google.com/view/mycreations-slopirate/html-entry-generator-demo)
 
 
